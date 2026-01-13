@@ -1,14 +1,3 @@
-; Engine configuration file.
-config_version=5
-
-[application]
-config/name="IronZone"
-run/main_scene="res://scenes/Main.tscn"
-
-[input]
-ui_left={"deadzone":0.5,"events":[{"type":"key","keycode":65},{"type":"key","keycode":16777231}]}
-ui_right={"deadzone":0.5,"events":[{"type":"key","keycode":68},{"type":"key","keycode":16777233}]
-cat project.godot
 cat <<'EOF' > scripts/player/player.gd
 extends CharacterBody2D
 
@@ -30,3 +19,4 @@ func _physics_process(delta):
 
 	velocity = dir * speed
 	move_and_slide()
+EOF
