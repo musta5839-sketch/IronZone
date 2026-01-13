@@ -1,12 +1,18 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=9 format=3]
 
 [node name="Main" type="Node2D"]
 
 [node name="Performance" type="Node" parent="."]
-script = ExtResource( 4 )
+script = ExtResource( 6 )
 
 [node name="Combat" type="Node2D" parent="."]
-script = ExtResource( 5 )
+script = ExtResource( 7 )
+
+[node name="Kills" type="Node" parent="."]
+script = ExtResource( 8 )
+
+[node name="Spawner" type="Node2D" parent="."]
+script = ExtResource( 9 )
 
 [node name="Player" type="CharacterBody2D" parent="."]
 script = ExtResource( 1 )
@@ -14,15 +20,15 @@ script = ExtResource( 1 )
 [node name="PlayerCollision" type="CollisionShape2D" parent="Player"]
 shape = CircleShape2D { radius = 16 }
 
+[node name="Camera2D" type="Camera2D" parent="Player"]
+current = true
+
 [node name="Enemy" type="CharacterBody2D" parent="."]
-position = Vector2(300, 200)
+position = Vector2(300,200)
 script = ExtResource( 2 )
 
 [node name="EnemyCollision" type="CollisionShape2D" parent="Enemy"]
 shape = CircleShape2D { radius = 16 }
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-current = true
 
 [node name="Joystick" type="Control" parent="."]
 anchor_right = 0
@@ -32,8 +38,17 @@ offset_bottom = -40
 custom_minimum_size = Vector2(160,160)
 script = ExtResource( 3 )
 
+[node name="HPBar" type="Control" parent="."]
+offset_left = 20
+offset_top = 20
+custom_minimum_size = Vector2(200,16)
+script = ExtResource( 4 )
+
 [ext_resource type="Script" path="res://scripts/player/player.gd" id=1]
 [ext_resource type="Script" path="res://scripts/enemy/enemy.gd" id=2]
 [ext_resource type="Script" path="res://scripts/ui/virtual_joystick.gd" id=3]
-[ext_resource type="Script" path="res://scripts/core/performance.gd" id=4]
-[ext_resource type="Script" path="res://scripts/core/combat.gd" id=5]
+[ext_resource type="Script" path="res://scripts/ui/hp_bar.gd" id=4]
+[ext_resource type="Script" path="res://scripts/core/combat.gd" id=7]
+[ext_resource type="Script" path="res://scripts/core/performance.gd" id=6]
+[ext_resource type="Script" path="res://scripts/core/kills.gd" id=8]
+[ext_resource type="Script" path="res://scripts/core/spawner.gd" id=9]
