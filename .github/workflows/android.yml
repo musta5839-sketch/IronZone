@@ -1,4 +1,4 @@
-name: Build & Release Android APK
+name: Build Android APK
 
 on:
   push:
@@ -10,30 +10,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
+    - uses: actions/checkout@v4
 
-    - name: Generate Debug Keystore
-      run: |
-        keytool -genkey -v \
-        -keystore debug.keystore \
-        -storepass android \
-        -alias androiddebugkey \
-        -keypass android \
-        -dname "CN=Android Debug,O=Android,C=US" \
-        -keyalg RSA -keysize 2048 -validity 10000
-
-    - name: Godot Android Export
-      uses: firebelley/godot-export@v6
+    - name: Setup Godot
+      uses: chickensoft-games/setup-godot@v1
       with:
-        godot-version: 4.2.1
-        export-template: android
-        export-name: IronZone
-        export-path: build/
+        version: 4.2.1
+        use-dotnet: false
 
-    - name: Create GitHub Release
+    - name: Export APK
+      run: |
+        mkdir -p build
+        godot --headless --export-release "Android" build/IronZone.apk
+
+    - name: Upload APK to Release
       uses: softprops/action-gh-release@v2
       with:
-        files: build/*.apk
+        files: build/IronZone.apk
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
