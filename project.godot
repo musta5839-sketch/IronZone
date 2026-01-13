@@ -2,31 +2,15 @@
 config_version=5
 
 [application]
-config/name="IronZone"
+config/name="Iron Zone"
 run/main_scene="res://scenes/Main.tscn"
+config/icon="res://icon.png"
+
+[display]
+window/handheld/orientation="landscape"
 
 [input]
-ui_left={"deadzone":0.5,"events":[{"type":"key","keycode":65},{"type":"key","keycode":16777231}]}
-ui_right={"deadzone":0.5,"events":[{"type":"key","keycode":68},{"type":"key","keycode":16777233}]
-cat project.godot
-cat <<'EOF' > scripts/player/player.gd
-extends CharacterBody2D
-
-@export var speed := 220.0
-
-func _physics_process(delta):
-	var dir := Vector2.ZERO
-	if Input.is_action_pressed("ui_right"):
-		dir.x += 1
-	if Input.is_action_pressed("ui_left"):
-		dir.x -= 1
-	if Input.is_action_pressed("ui_down"):
-		dir.y += 1
-	if Input.is_action_pressed("ui_up"):
-		dir.y -= 1
-
-	if dir != Vector2.ZERO:
-		dir = dir.normalized()
-
-	velocity = dir * speed
-	move_and_slide()
+ui_left={"deadzone":0.5,"events":[{"type":"key","keycode":65}]}
+ui_right={"deadzone":0.5,"events":[{"type":"key","keycode":68}]}
+ui_up={"deadzone":0.5,"events":[{"type":"key","keycode":87}]}
+ui_down={"deadzone":0.5,"events":[{"type":"key","keycode":83}]}
