@@ -1,7 +1,9 @@
-[node name="Game" type="Node2D"]
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=4 format=3]
 
 [node name="Main" type="Node2D"]
+
+[node name="Performance" type="Node" parent="."]
+script = ExtResource( 3 )
 
 [node name="Player" type="CharacterBody2D" parent="."]
 script = ExtResource( 1 )
@@ -19,3 +21,4 @@ script = ExtResource( 2 )
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id=1]
 [ext_resource type="Script" path="res://scripts/ui/virtual_joystick.gd" id=2]
+[ext_resource type="Script" path="res://scripts/core/performance.gd" id=3]
