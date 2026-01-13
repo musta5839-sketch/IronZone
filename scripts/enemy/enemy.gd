@@ -13,6 +13,10 @@ func _ready():
 
 func take_damage(d):
 	hp -= d
+	modulate = Color(1,0.5,0.5)
+	await get_tree().create_timer(0.1).timeout
+	modulate = Color.WHITE
+
 	if hp <= 0:
 		if kills: kills.add_kill()
 		queue_free()

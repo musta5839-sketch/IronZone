@@ -1,6 +1,9 @@
-[gd_scene load_steps=11 format=3]
+[gd_scene load_steps=12 format=3]
 
 [node name="Main" type="Node2D"]
+
+[node name="Menu" type="Control" parent="."]
+script = ExtResource( 11 )
 
 [node name="Performance" type="Node" parent="."]
 script = ExtResource( 6 )
@@ -53,3 +56,4 @@ script = ExtResource( 4 )
 [ext_resource type="Script" path="res://scripts/core/kills.gd" id=8]
 [ext_resource type="Script" path="res://scripts/core/spawner.gd" id=9]
 [ext_resource type="Script" path="res://scripts/ui/fire_button.gd" id=10]
+[ext_resource type="Script" path="res://scripts/ui/menu.gd" id=11]
