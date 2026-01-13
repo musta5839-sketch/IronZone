@@ -10,19 +10,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Export Android APK using Godot
-        uses: firebelley/godot-export@v5.2.0
+      - name: Setup Godot
+        uses: chickensoft-games/setup-godot@v1
         with:
-          godot_version: 4.2.1
-          export_preset: "Android"
-          project_path: .
-          archive_output: false
+          version: 4.2.1
+          use-dotnet: false
 
-      - name: Upload APK to GitHub Release
-        uses: softprops/action-gh-release@v1
+      - name: Export Android APK
+        run: |
+          mkdir -p build
+          godot --headless --export-release "Android" build/IronZone.apk
+
+      - name: Verify APK
+        run: ls -lh build/
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
         with:
-          files: |
-            **/*.apk
+          files: build/*.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
