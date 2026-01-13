@@ -8,26 +8,23 @@ var joystick := Vector2.ZERO
 func set_joystick(dir: Vector2):
 	joystick = dir
 
+func shoot():
+	var bullet = preload("res://scripts/weapons/bullet.gd").new()
+	bullet.position = global_position
+	bullet.rotation = rotation
+	get_parent().add_child(bullet)
+
 func take_damage(amount):
 	hp -= amount
 	print("HP:", hp)
 	if hp <= 0:
-		queue_free()
+		get_tree().reload_current_scene()
 
 func _physics_process(delta):
 	var dir := joystick
 
-	if dir == Vector2.ZERO:
-		if Input.is_action_pressed("ui_right"):
-			dir.x += 1
-		if Input.is_action_pressed("ui_left"):
-			dir.x -= 1
-		if Input.is_action_pressed("ui_down"):
-			dir.y += 1
-		if Input.is_action_pressed("ui_up"):
-			dir.y -= 1
-
 	if dir != Vector2.ZERO:
+		rotation = dir.angle()
 		dir = dir.normalized()
 
 	velocity = dir * speed
