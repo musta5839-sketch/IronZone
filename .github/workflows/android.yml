@@ -1,0 +1,28 @@
+name: Build Android APK
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Godot Android Export
+      uses: firebelley/godot-export@v6
+      with:
+        godot-version: 4.2.1
+        export-template: android
+        export-name: IronZone
+        export-path: build/
+        cache: true
+
+    - name: Upload APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: IronZone-APK
+        path: build/*.apk
