@@ -5,6 +5,7 @@ extends CharacterBody2D
 var player := null
 
 func _ready():
+	add_to_group("Enemy")
 	player = get_tree().get_root().get_node("Main/Player")
 
 func _physics_process(delta):
